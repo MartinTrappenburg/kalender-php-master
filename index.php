@@ -1,11 +1,27 @@
 <?php
     require_once('connection.php');
-    $sql = "SELECT naam, datum FROM birthdays";
-   $result = mysqli_query($sql, $conn);
-   var_dump($result);
-       // var_dump($result->naam);
-      
-		//require_once('delete.php');
+    $sql = "SELECT * FROM birthdays ORDER BY month, day, year, person";
+   $result = mysqli_query($conn, $sql);
+
+    
+   if (mysqli_num_rows($result) > 0) {
+   	$month = "";
+   	$day = "";
+   	while ($row = mysqli_fetch_assoc($result)) {
+   		if ($month != date('F', mktime( 0, 0, 0, $row['month']))) {
+   			$month = date('F', mktime( 0, 0, 0, $row['month']));
+   			echo "<h1>" . $month. "</h1>";
+   		}
+   		if ($day != $row["day"]) {
+   			$day = $row["day"];
+   			echo "<h2>" . $row["day"] . "</h2>";
+   		}
+   		echo "<p><a href='edit.php?id=". $row["id"]. "'>". $row["person"]. " (". $row["year"]. ")</a><a href='delete.php?id=". $row["id"]. "'>x</a></p>";
+   		}
+  	} else {
+  		echo "0 results";
+  	}
+
 
 
 ?>
@@ -13,25 +29,23 @@
 <!doctype html>
 
 <html>
-	<head>a
+	<head>
 		<title>Verjaardagskalender</title>
         <link href="main.css" rel="stylesheet" type="text/css">
 	</head>
 	
 	<body>
-		<h1>februari</h1>
-		<h2>22</h2>
-		<button type="submit" name="deleting" value="">delete</button>
+	
 		<?php
-			 foreach ($result as $results):
-				echo $results->person;
-                ?>
+		//	 foreach ($row as $rows):
+		//		echo $rows->person;
+          //      ?>
 			<form action="delete.php" method="post">
-					<input type="hidden" name="id" value=$result->ID>
-					<button type="submit" <"">
-				</form>	
-                <?php
-				endforeach;
+					<input type="hidden" name="id" value=$rows-
+				<button type="submit" <"">
+			</form>	
+             <?php
+			//	endforeach;
 
 			?>
 <!-- 
@@ -165,7 +179,7 @@
                 Goran (2006)</a>
                 
             <a href="delete.php?id=11">x</a>
-        </p> --> -->
+        </p> -->
 
 <p><a href="create.php">+ Toevoegen</a></p>
 

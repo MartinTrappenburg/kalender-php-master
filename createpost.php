@@ -1,10 +1,11 @@
 <?php 
-require_once('Header.php');
-var_dump($_REQUEST['geboorte']);
+require_once('connection.php');
 	$FirstName = $_REQUEST['name'];
-	$Birthday = $_REQUEST['geboorte'];
+	$Day = $_REQUEST['dag'];
+	$Month = $_REQUEST['maand'];
+	$Year = $_REQUEST['jaar'];
 
-		$sql = "INSERT INTO birthdays (naam, datum) VALUES ('$FirstName','$Birthday')";
+		$sql = "INSERT INTO birthdays (person, day, month, year) VALUES ('$FirstName','$Day', '$Month', '$Year')";
 		if ($conn->query($sql) === TRUE) {
 	    	echo "New record created successfully";
 		} else {

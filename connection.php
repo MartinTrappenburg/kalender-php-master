@@ -8,7 +8,5 @@
 	if (!$conn ) {
 		die("connection_failed".mysqli_connect_error());
 	}
-	echo "connection succesful!";
-	$result = $conn->query('SELECT * FROM birthdays');
-	var_dump($result)
+	//echo "connection succesful!";
 ?>
